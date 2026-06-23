@@ -10,21 +10,21 @@
 }
 
 :root {
-  --black:        #000000;
-  --near-black:   #080808;
-  --dark:         #111111;
-  --dark-mid:     #1a1a1a;
-  --mid:          #2a2a2a;
+  --black:        #0a1c12;
+  --near-black:   #0d2318;
+  --dark:         #112b1c;
+  --dark-mid:     #163323;
+  --mid:          #1e3d2a;
   --white:        #f5f4f0;
   --off-white:    #d4d0c8;
   --cream:        #e8e2d4;
   --muted:        #6b6860;
 
-  /* Profile-extracted forest green palette */
-  --forest:       #0f2419;
-  --forest-mid:   #152b1e;
-  --forest-light: #1e3d2a;
-  --forest-card:  #192e22;
+  /* Deeper forest sections (contrast against phthalo bg) */
+  --forest:       #071510;
+  --forest-mid:   #0a1c13;
+  --forest-light: #112b1c;
+  --forest-card:  #0d2018;
 
   --gold:         #c9a84c;
   --gold-light:   #e8c97a;
@@ -751,39 +751,6 @@ body:has(button:hover) .cursor-follower {
   gap: 32px;
 }
 
-.about-frame {
-  position: relative;
-  aspect-ratio: 4/3;
-  background: var(--forest);
-  border: 1px solid rgba(201, 168, 76, 0.15);
-  overflow: hidden;
-}
-
-.about-frame::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(135deg, rgba(201,168,76,0.05) 0%, transparent 50%),
-    linear-gradient(315deg, rgba(139,32,32,0.05) 0%, transparent 50%);
-}
-
-.about-frame-inner {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 32px;
-}
-
-.about-logo-img {
-  width: 90%;
-  max-width: 420px;
-  height: auto;
-  object-fit: contain;
-  border-radius: 4px;
-}
 
 .about-stats {
   display: flex;
