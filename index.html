@@ -1,54 +1,265 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Filmmaker</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kaiser Productions</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet" />
 </head>
 <body>
-    <header>
-        <h1>Your Name</h1>
-        <nav>
-            <a href="#work">Work</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
 
-    <section class="intro">
-        <h2>Filmmaker | Storyteller | Dreamer</h2>
-        <p>Welcome to my world of visual storytelling.</p>
-    </section>
+  <!-- CURSOR -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursorFollower"></div>
 
-    <section id="work">
-        <h2>My Work</h2>
-        <div class="gallery">
-            <div class="project-card">
-                <h3>Project Title 1</h3>
-                <p>Short description of the project.</p>
-            </div>
-            <div class="project-card">
-                <h3>Project Title 2</h3>
-                <p>Short description of the project.</p>
-            </div>
+  <!-- NAVIGATION -->
+  <nav class="nav" id="nav">
+    <a href="#" class="nav-logo">KAISER <span>PRODUCTIONS</span></a>
+    <button class="nav-menu-btn" id="menuBtn" aria-label="Menu">
+      <span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#films" class="nav-link">Films</a></li>
+      <li><a href="#about" class="nav-link">About</a></li>
+      <li><a href="#manifesto" class="nav-link">Manifesto</a></li>
+      <li><a href="#contact" class="nav-link">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- MOBILE MENU OVERLAY -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-inner">
+      <ul>
+        <li><a href="#films" class="mobile-link">Films</a></li>
+        <li><a href="#about" class="mobile-link">About</a></li>
+        <li><a href="#manifesto" class="mobile-link">Manifesto</a></li>
+        <li><a href="#contact" class="mobile-link">Contact</a></li>
+      </ul>
+      <p class="mobile-tagline">Stories that endure.</p>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <div class="hero-grain"></div>
+      <div class="hero-vignette"></div>
+    </div>
+    <div class="hero-content">
+      <p class="hero-eyebrow reveal">Est. Hyderabad · India</p>
+      <h1 class="hero-title">
+        <span class="hero-line reveal-delay-1">We make</span>
+        <span class="hero-line italic reveal-delay-2">films that</span>
+        <span class="hero-line reveal-delay-3">matter.</span>
+      </h1>
+      <p class="hero-sub reveal-delay-4">Kaiser Productions — Storytelling at the intersection of truth, craft, and vision.</p>
+      <a href="#films" class="hero-cta reveal-delay-5">View Our Work</a>
+    </div>
+    <div class="hero-scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- MARQUEE BANNER -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span>Storytelling &nbsp;&bull;&nbsp; Visual Cinema &nbsp;&bull;&nbsp; Authentic Narratives &nbsp;&bull;&nbsp; Bold Vision &nbsp;&bull;&nbsp; India &nbsp;&bull;&nbsp; Storytelling &nbsp;&bull;&nbsp; Visual Cinema &nbsp;&bull;&nbsp; Authentic Narratives &nbsp;&bull;&nbsp; Bold Vision &nbsp;&bull;&nbsp; India &nbsp;&bull;&nbsp;</span>
+      <span aria-hidden="true">Storytelling &nbsp;&bull;&nbsp; Visual Cinema &nbsp;&bull;&nbsp; Authentic Narratives &nbsp;&bull;&nbsp; Bold Vision &nbsp;&bull;&nbsp; India &nbsp;&bull;&nbsp; Storytelling &nbsp;&bull;&nbsp; Visual Cinema &nbsp;&bull;&nbsp; Authentic Narratives &nbsp;&bull;&nbsp; Bold Vision &nbsp;&bull;&nbsp; India &nbsp;&bull;&nbsp;</span>
+    </div>
+  </div>
+
+  <!-- FILMS / PROJECTS -->
+  <section class="films" id="films">
+    <div class="section-header">
+      <span class="section-label">Productions</span>
+      <h2 class="section-title">The Work</h2>
+    </div>
+    <div class="films-grid">
+      <article class="film-card film-card--large" data-index="01">
+        <div class="film-card-inner">
+          <div class="film-card-bg" style="background: linear-gradient(135deg, #1a0a00 0%, #3d1f00 50%, #0d0d0d 100%);"></div>
+          <div class="film-card-content">
+            <span class="film-genre">Feature Film</span>
+            <h3 class="film-title">Untitled Feature</h3>
+            <p class="film-desc">A visceral journey through the streets of Hyderabad — raw, human, unflinching.</p>
+            <span class="film-year">2025</span>
+          </div>
+          <div class="film-card-index">01</div>
         </div>
-    </section>
+      </article>
+      <article class="film-card" data-index="02">
+        <div class="film-card-inner">
+          <div class="film-card-bg" style="background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3d 50%, #0d0d0d 100%);"></div>
+          <div class="film-card-content">
+            <span class="film-genre">Short Film</span>
+            <h3 class="film-title">The Silence Between</h3>
+            <p class="film-desc">Emotion distilled to its purest frame.</p>
+            <span class="film-year">2024</span>
+          </div>
+          <div class="film-card-index">02</div>
+        </div>
+      </article>
+      <article class="film-card" data-index="03">
+        <div class="film-card-inner">
+          <div class="film-card-bg" style="background: linear-gradient(135deg, #0a1a0a 0%, #1a3d1a 50%, #0d0d0d 100%);"></div>
+          <div class="film-card-content">
+            <span class="film-genre">Documentary</span>
+            <h3 class="film-title">Echoes of the City</h3>
+            <p class="film-desc">Urban stories from the margins of Hindi cinema.</p>
+            <span class="film-year">2024</span>
+          </div>
+          <div class="film-card-index">03</div>
+        </div>
+      </article>
+      <article class="film-card film-card--wide" data-index="04">
+        <div class="film-card-inner">
+          <div class="film-card-bg" style="background: linear-gradient(135deg, #1a1a0a 0%, #2a2a00 50%, #0d0d0d 100%);"></div>
+          <div class="film-card-content">
+            <span class="film-genre">Series</span>
+            <h3 class="film-title">Coming Soon</h3>
+            <p class="film-desc">A new chapter in premium storytelling. Details to follow.</p>
+            <span class="film-year">2026</span>
+          </div>
+          <div class="film-card-index">04</div>
+        </div>
+      </article>
+    </div>
+  </section>
 
-    <section id="about">
-        <h2>About Me</h2>
-        <p>I am a filmmaker passionate about capturing emotions through visuals. 
-        From the vibrant streets of Hyderabad to the sets of Hindi cinema, 
-        my journey is fueled by creativity, clarity, and humor.</p>
-    </section>
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-inner">
+      <div class="about-text">
+        <span class="section-label">The House</span>
+        <h2 class="about-headline">
+          Born in <em>Hyderabad.</em><br />
+          Made for the <em>world.</em>
+        </h2>
+        <div class="about-body">
+          <p>Kaiser Productions is an independent film and content production company with roots in Hyderabad and a vision that stretches across the landscape of Indian cinema and beyond.</p>
+          <p>We believe storytelling is the most powerful force in culture. Every frame we craft carries intention — a commitment to authenticity, craft, and the kind of clarity that cuts through noise.</p>
+          <p>From intimate personal stories to ambitious commercial endeavors, Kaiser Productions stands for work that resonates long after the credits roll.</p>
+        </div>
+        <div class="about-stats">
+          <div class="stat">
+            <span class="stat-number">10+</span>
+            <span class="stat-label">Productions</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">3</span>
+            <span class="stat-label">Award Noms</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">1</span>
+            <span class="stat-label">Vision</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-visual">
+        <div class="about-frame">
+          <div class="about-frame-inner">
+            <div class="about-image-placeholder">
+              <div class="film-reel">
+                <div class="reel-outer">
+                  <div class="reel-center"></div>
+                  <div class="reel-hole reel-hole--1"></div>
+                  <div class="reel-hole reel-hole--2"></div>
+                  <div class="reel-hole reel-hole--3"></div>
+                  <div class="reel-hole reel-hole--4"></div>
+                  <div class="reel-hole reel-hole--5"></div>
+                  <div class="reel-hole reel-hole--6"></div>
+                  <div class="reel-hole reel-hole--7"></div>
+                  <div class="reel-hole reel-hole--8"></div>
+                </div>
+              </div>
+              <span>Kaiser Productions</span>
+            </div>
+          </div>
+        </div>
+        <div class="about-quote">
+          <blockquote>"Cinema is truth at 24 frames per second."</blockquote>
+          <cite>— Jean-Luc Godard</cite>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <section id="contact">
-        <h2>Contact</h2>
-        <p>Feel free to reach out: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
-    </section>
+  <!-- MANIFESTO -->
+  <section class="manifesto" id="manifesto">
+    <div class="manifesto-inner">
+      <span class="section-label light">Philosophy</span>
+      <h2 class="manifesto-title">Our Manifesto</h2>
+      <div class="manifesto-grid">
+        <div class="manifesto-item">
+          <span class="manifesto-num">I</span>
+          <h3>Truth Before Spectacle</h3>
+          <p>We chase the authentic moment — the one that makes an audience forget they're watching a film. Spectacle serves story; never the other way around.</p>
+        </div>
+        <div class="manifesto-item">
+          <span class="manifesto-num">II</span>
+          <h3>Clarity of Vision</h3>
+          <p>Every creative decision begins with a clear "why." We bring relentless focus to our work, stripping away the unnecessary until only the essential remains.</p>
+        </div>
+        <div class="manifesto-item">
+          <span class="manifesto-num">III</span>
+          <h3>Humor as Humanity</h3>
+          <p>We don't take ourselves so seriously that we forget to be human. Humor is not a departure from depth — it is its most honest expression.</p>
+        </div>
+        <div class="manifesto-item">
+          <span class="manifesto-num">IV</span>
+          <h3>Stories Without Borders</h3>
+          <p>Rooted in India, resonant everywhere. We tell Indian stories with global ambition — without apology and without compromise.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <footer>
-        <p>© 2025 Your Name. Made with heart.</p>
-    </footer>
+  <!-- FULL-BLEED STATEMENT -->
+  <section class="statement">
+    <div class="statement-inner">
+      <p class="statement-text">
+        <span class="gold">Kaiser</span> is not just a name.<br />
+        It is a standard.
+      </p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="contact-inner">
+      <span class="section-label">Get In Touch</span>
+      <h2 class="contact-title">Let's Make<br /><em>Something Real.</em></h2>
+      <div class="contact-body">
+        <p>We are always open to collaborations, co-productions, and conversations that could lead to meaningful work. If you have a story that deserves to be told, reach out.</p>
+        <div class="contact-links">
+          <a href="mailto:ssekharjanga@gmail.com" class="contact-email">ssekharjanga@gmail.com</a>
+          <div class="contact-social">
+            <a href="#" class="social-link">Instagram</a>
+            <a href="#" class="social-link">Vimeo</a>
+            <a href="#" class="social-link">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">KAISER <span>PRODUCTIONS</span></div>
+      <div class="footer-center">
+        <p>Hyderabad &middot; Mumbai &middot; India</p>
+      </div>
+      <div class="footer-right">
+        <p>&copy; 2025 Kaiser Productions. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
