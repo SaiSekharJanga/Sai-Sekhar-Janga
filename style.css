@@ -11,11 +11,11 @@
 }
 
 :root {
-  --black:       rgba(5, 10, 5, 0.82);
-  --near-black:  rgba(8, 14, 8, 0.78);
-  --dark:        rgba(10, 18, 10, 0.75);
-  --dark-mid:    rgba(14, 22, 14, 0.7);
-  --mid:         rgba(20, 30, 20, 0.65);
+  --black:       #0b1d12;
+  --near-black:  #0d2318;
+  --dark:        #112b1c;
+  --dark-mid:    #163320;
+  --mid:         #1c3d28;
   --white:       #f5f4f0;
   --off-white:   #d4d0c8;
   --muted:       #6b6860;
@@ -45,10 +45,6 @@ html {
 
 body {
   background-color: var(--black);
-  background-image: url('bg.jpeg');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
   color: var(--white);
   font-family: var(--font-sans);
   font-weight: 300;
