@@ -53,16 +53,18 @@ body {
   cursor: none;
 }
 
-/* Gold scratch streaks — fixed SVG overlay across full page */
+/* Gold scratch streaks — fixed on top of everything, blends with sections */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 1600'%3E%3C!-- thick main slash --%3E%3Cline x1='680' y1='0' x2='150' y2='1600' stroke='rgba(201,168,76,0.9)' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='690' y1='0' x2='160' y2='1600' stroke='rgba(232,201,122,0.25)' stroke-width='0.8'/%3E%3Cline x1='668' y1='0' x2='138' y2='1600' stroke='rgba(201,168,76,0.18)' stroke-width='0.4'/%3E%3C!-- crossing slash --%3E%3Cline x1='110' y1='160' x2='940' y2='800' stroke='rgba(201,168,76,0.85)' stroke-width='2.5' stroke-linecap='round'/%3E%3Cline x1='110' y1='174' x2='940' y2='814' stroke='rgba(232,201,122,0.22)' stroke-width='0.5'/%3E%3C!-- fine parallel lines --%3E%3Cline x1='730' y1='0' x2='200' y2='1600' stroke='rgba(201,168,76,0.28)' stroke-width='0.6'/%3E%3Cline x1='750' y1='0' x2='220' y2='1600' stroke='rgba(201,168,76,0.12)' stroke-width='0.3'/%3E%3Cline x1='600' y1='0' x2='70' y2='1600' stroke='rgba(232,201,122,0.18)' stroke-width='0.4'/%3E%3Cline x1='810' y1='0' x2='280' y2='1600' stroke='rgba(201,168,76,0.1)' stroke-width='0.3'/%3E%3C!-- lower cross hair --%3E%3Cline x1='180' y1='520' x2='820' y2='1140' stroke='rgba(201,168,76,0.2)' stroke-width='0.5'/%3E%3Cline x1='50' y1='900' x2='700' y2='300' stroke='rgba(232,201,122,0.12)' stroke-width='0.4'/%3E%3C!-- splatters --%3E%3Ccircle cx='435' cy='275' r='2.5' fill='rgba(201,168,76,0.75)'/%3E%3Ccircle cx='437' cy='278' r='1.2' fill='rgba(232,201,122,0.9)'/%3E%3Ccircle cx='345' cy='590' r='1.8' fill='rgba(201,168,76,0.65)'/%3E%3Ccircle cx='565' cy='930' r='1.3' fill='rgba(232,201,122,0.8)'/%3E%3Ccircle cx='725' cy='475' r='2.2' fill='rgba(201,168,76,0.55)'/%3E%3Ccircle cx='265' cy='1060' r='1.1' fill='rgba(201,168,76,0.6)'/%3E%3Ccircle cx='485' cy='755' r='1.6' fill='rgba(232,201,122,0.55)'/%3E%3Ccircle cx='185' cy='855' r='1.4' fill='rgba(201,168,76,0.45)'/%3E%3Ccircle cx='660' cy='195' r='1' fill='rgba(201,168,76,0.5)'/%3E%3Ccircle cx='390' cy='1200' r='1.5' fill='rgba(232,201,122,0.4)'/%3E%3Ccircle cx='820' cy='650' r='1' fill='rgba(201,168,76,0.4)'/%3E%3C/svg%3E");
-  background-size: cover;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 1600'%3E%3Cline x1='680' y1='0' x2='150' y2='1600' stroke='%23c9a84c' stroke-width='3' stroke-linecap='round' opacity='0.75'/%3E%3Cline x1='692' y1='0' x2='162' y2='1600' stroke='%23e8c97a' stroke-width='0.7' opacity='0.3'/%3E%3Cline x1='666' y1='0' x2='136' y2='1600' stroke='%23c9a84c' stroke-width='0.4' opacity='0.2'/%3E%3Cline x1='110' y1='160' x2='940' y2='800' stroke='%23c9a84c' stroke-width='2.5' stroke-linecap='round' opacity='0.7'/%3E%3Cline x1='110' y1='172' x2='940' y2='812' stroke='%23e8c97a' stroke-width='0.5' opacity='0.25'/%3E%3Cline x1='728' y1='0' x2='198' y2='1600' stroke='%23c9a84c' stroke-width='0.6' opacity='0.25'/%3E%3Cline x1='748' y1='0' x2='218' y2='1600' stroke='%23c9a84c' stroke-width='0.3' opacity='0.12'/%3E%3Cline x1='598' y1='0' x2='68' y2='1600' stroke='%23e8c97a' stroke-width='0.4' opacity='0.15'/%3E%3Cline x1='808' y1='0' x2='278' y2='1600' stroke='%23c9a84c' stroke-width='0.3' opacity='0.1'/%3E%3Cline x1='180' y1='520' x2='820' y2='1140' stroke='%23c9a84c' stroke-width='0.5' opacity='0.18'/%3E%3Cline x1='50' y1='880' x2='680' y2='280' stroke='%23e8c97a' stroke-width='0.4' opacity='0.1'/%3E%3Ccircle cx='435' cy='275' r='2.5' fill='%23c9a84c' opacity='0.8'/%3E%3Ccircle cx='345' cy='590' r='1.8' fill='%23c9a84c' opacity='0.7'/%3E%3Ccircle cx='565' cy='930' r='1.3' fill='%23e8c97a' opacity='0.85'/%3E%3Ccircle cx='725' cy='475' r='2.2' fill='%23c9a84c' opacity='0.6'/%3E%3Ccircle cx='265' cy='1060' r='1.1' fill='%23c9a84c' opacity='0.65'/%3E%3Ccircle cx='485' cy='755' r='1.6' fill='%23e8c97a' opacity='0.6'/%3E%3Ccircle cx='185' cy='855' r='1.4' fill='%23c9a84c' opacity='0.5'/%3E%3Ccircle cx='660' cy='195' r='1' fill='%23c9a84c' opacity='0.55'/%3E%3Ccircle cx='390' cy='1200' r='1.5' fill='%23e8c97a' opacity='0.45'/%3E%3Ccircle cx='820' cy='650' r='1' fill='%23c9a84c' opacity='0.45'/%3E%3C/svg%3E");
+  background-size: 100% auto;
   background-position: center top;
+  background-repeat: no-repeat;
   pointer-events: none;
-  z-index: 0;
+  z-index: 9997;
+  mix-blend-mode: screen;
 }
 
 body::after {
