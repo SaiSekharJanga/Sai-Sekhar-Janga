@@ -59,14 +59,14 @@ body::before {
   position: fixed;
   top: -10%;
   left: -5%;
-  width: 55%;
-  height: 55%;
+  width: 65%;
+  height: 65%;
   background: linear-gradient(
     135deg,
     transparent 0%,
-    rgba(201, 168, 76, 0.04) 30%,
-    rgba(232, 201, 122, 0.07) 50%,
-    rgba(201, 168, 76, 0.04) 70%,
+    rgba(201, 168, 76, 0.12) 25%,
+    rgba(232, 201, 122, 0.28) 50%,
+    rgba(201, 168, 76, 0.12) 75%,
     transparent 100%
   );
   transform: rotate(-20deg);
@@ -80,14 +80,14 @@ body::after {
   position: fixed;
   bottom: -15%;
   right: -5%;
-  width: 60%;
-  height: 60%;
+  width: 70%;
+  height: 70%;
   background: linear-gradient(
     135deg,
     transparent 0%,
-    rgba(201, 168, 76, 0.03) 30%,
-    rgba(232, 201, 122, 0.06) 55%,
-    rgba(201, 168, 76, 0.03) 75%,
+    rgba(201, 168, 76, 0.1) 25%,
+    rgba(232, 201, 122, 0.24) 55%,
+    rgba(201, 168, 76, 0.1) 75%,
     transparent 100%
   );
   transform: rotate(-20deg);
@@ -325,7 +325,7 @@ body:has(button:hover) .cursor-follower {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(115deg, transparent 20%, rgba(201,168,76,0.06) 38%, rgba(232,201,122,0.1) 50%, rgba(201,168,76,0.05) 62%, transparent 80%),
+    linear-gradient(115deg, transparent 15%, rgba(201,168,76,0.15) 35%, rgba(232,201,122,0.28) 50%, rgba(201,168,76,0.14) 65%, transparent 85%),
     radial-gradient(ellipse at 15% 60%, rgba(201,168,76,0.08) 0%, transparent 50%),
     radial-gradient(ellipse at 85% 20%, rgba(139,26,26,0.07) 0%, transparent 50%),
     linear-gradient(160deg, #0d2018 0%, #0b1d12 40%, #071510 100%);
