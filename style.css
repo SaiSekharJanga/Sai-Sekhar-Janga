@@ -11,11 +11,11 @@
 }
 
 :root {
-  --black:       #000000;
-  --near-black:  #080808;
-  --dark:        #111111;
-  --dark-mid:    #1a1a1a;
-  --mid:         #2a2a2a;
+  --black:       #0b1d12;
+  --near-black:  #0d2318;
+  --dark:        #112b1c;
+  --dark-mid:    #163320;
+  --mid:         #1c3d28;
   --white:       #f5f4f0;
   --off-white:   #d4d0c8;
   --muted:       #6b6860;
@@ -51,6 +51,48 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   cursor: none;
+}
+
+/* Gold streak — top-left diagonal */
+body::before {
+  content: '';
+  position: fixed;
+  top: -10%;
+  left: -5%;
+  width: 55%;
+  height: 55%;
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    rgba(201, 168, 76, 0.04) 30%,
+    rgba(232, 201, 122, 0.07) 50%,
+    rgba(201, 168, 76, 0.04) 70%,
+    transparent 100%
+  );
+  transform: rotate(-20deg);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Gold streak — bottom-right diagonal */
+body::after {
+  content: '';
+  position: fixed;
+  bottom: -15%;
+  right: -5%;
+  width: 60%;
+  height: 60%;
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    rgba(201, 168, 76, 0.03) 30%,
+    rgba(232, 201, 122, 0.06) 55%,
+    rgba(201, 168, 76, 0.03) 75%,
+    transparent 100%
+  );
+  transform: rotate(-20deg);
+  pointer-events: none;
+  z-index: 0;
 }
 
 ::selection {
@@ -283,9 +325,10 @@ body:has(button:hover) .cursor-follower {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 20% 50%, rgba(201,168,76,0.06) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 20%, rgba(139,26,26,0.08) 0%, transparent 60%),
-    linear-gradient(160deg, #0a0500 0%, #000000 40%, #050010 100%);
+    linear-gradient(115deg, transparent 20%, rgba(201,168,76,0.06) 38%, rgba(232,201,122,0.1) 50%, rgba(201,168,76,0.05) 62%, transparent 80%),
+    radial-gradient(ellipse at 15% 60%, rgba(201,168,76,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 20%, rgba(139,26,26,0.07) 0%, transparent 50%),
+    linear-gradient(160deg, #0d2018 0%, #0b1d12 40%, #071510 100%);
 }
 
 .hero-grain {
