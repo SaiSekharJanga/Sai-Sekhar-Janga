@@ -123,12 +123,16 @@ body:has(button:hover) .cursor-follower {
   transition: color 0.3s;
 }
 
-.nav-logo span {
-  color: var(--gold);
+.nav-logo-img {
+  height: 44px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  transition: opacity 0.3s;
 }
 
-.nav-logo:hover {
-  color: var(--gold-light);
+.nav-logo:hover .nav-logo-img {
+  opacity: 0.85;
 }
 
 .nav-links {
@@ -699,20 +703,12 @@ body:has(button:hover) .cursor-follower {
   justify-content: center;
 }
 
-.about-image-placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px;
-  color: var(--muted);
-}
-
-.about-image-placeholder span {
-  font-family: var(--font-sans);
-  font-size: 10px;
-  letter-spacing: 0.4em;
-  text-transform: uppercase;
-  color: var(--gold-dark);
+.about-logo-img {
+  width: 90%;
+  max-width: 420px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 4px;
 }
 
 .film-reel {
@@ -1020,14 +1016,17 @@ body:has(button:hover) .cursor-follower {
   gap: 24px;
 }
 
-.footer-logo {
-  font-family: var(--font-display);
-  font-size: 14px;
-  letter-spacing: 0.25em;
-  color: var(--white);
+.footer-logo-img {
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+  opacity: 0.85;
+  transition: opacity 0.3s;
 }
 
-.footer-logo span { color: var(--gold); }
+.footer-logo-img:hover {
+  opacity: 1;
+}
 
 .footer-center, .footer-right {
   font-size: 11px;
