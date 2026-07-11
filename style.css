@@ -125,7 +125,8 @@ body:has(button:hover) .cursor-follower {
 }
 
 .nav-logo-img {
-  height: 44px;
+  height: clamp(32px, 3.5vw, 44px);
+  max-width: 180px;
   width: auto;
   object-fit: contain;
   display: block;
@@ -275,8 +276,7 @@ body:has(button:hover) .cursor-follower {
   min-height: 700px;
   display: flex;
   align-items: flex-end;
-  padding: 0 var(--gutter);
-  padding-bottom: clamp(60px, 8vh, 100px);
+  padding: clamp(100px, 14vh, 160px) var(--gutter) clamp(60px, 8vh, 100px);
   overflow: hidden;
 }
 
