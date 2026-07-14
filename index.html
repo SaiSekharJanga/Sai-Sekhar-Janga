@@ -17,9 +17,7 @@
       position: fixed; inset: 0; z-index: 9999;
       background: #050a06;
       display: flex; align-items: center; justify-content: center;
-      transition: opacity 0.9s ease;
     }
-    #introSplash.kp-done { opacity: 0; pointer-events: none; }
 
     .kp-stage {
       position: relative;
@@ -29,24 +27,6 @@
       border: 1px solid rgba(201,162,77,0.25);
       border-radius: 6px;
       overflow: hidden;
-      transition:
-        width 0.85s cubic-bezier(.4,0,.2,1),
-        height 0.85s cubic-bezier(.4,0,.2,1),
-        border-radius 0.85s ease,
-        border-color 0.5s ease;
-    }
-    .kp-stage.kp-expand {
-      width: 100vw;
-      height: 100vh;
-      border-radius: 0;
-      border-color: transparent;
-    }
-    .kp-stage.kp-expand .kp-top,
-    .kp-stage.kp-expand .kp-anim,
-    .kp-stage.kp-expand .kp-bottom,
-    .kp-stage.kp-expand .kp-rec {
-      opacity: 0 !important;
-      transition: opacity 0.35s ease !important;
     }
 
     .kp-hint {
@@ -191,7 +171,7 @@
     }
   </style>
 </head>
-<body class="kp-intro-lock">
+<body>
 
   <!-- INTRO SPLASH -->
   <div id="introSplash">
@@ -253,10 +233,24 @@
   <!-- Inline intro script — fires immediately, no wait for script.js -->
   <script>
     (function () {
-      var splash  = document.getElementById('introSplash');
-      var stage   = splash.querySelector('.kp-stage');
-      var hint    = document.getElementById('kpHint');
-      var expanded = false;
+      var splash = document.getElementById('introSplash');
+      var hint   = document.getElementById('kpHint');
+
+      // Lock scroll during the animation sequence
+      document.body.classList.add('kp-intro-lock');
+
+      // REC timecode — starts counting from the moment the page loads
+      var recEl  = document.getElementById('kpRecTime');
+      var recSec = 0;
+      setInterval(function () {
+        recSec++;
+        if (recEl) {
+          recEl.textContent =
+            String(Math.floor(recSec / 3600)).padStart(2, '0') + ':' +
+            String(Math.floor((recSec % 3600) / 60)).padStart(2, '0') + ':' +
+            String(recSec % 60).padStart(2, '0');
+        }
+      }, 1000);
 
       // Film grain canvas
       var canvas = document.getElementById('kpGrain');
@@ -276,51 +270,30 @@
         }, 110);
       }
 
-      // REC timecode
-      var recEl = document.getElementById('kpRecTime');
-      var recSec = 0;
+      // After animations settle: unlock scroll, show hint, enable scroll-fade
       setTimeout(function () {
-        setInterval(function () {
-          recSec++;
-          if (recEl) {
-            recEl.textContent =
-              String(Math.floor(recSec / 3600)).padStart(2, '0') + ':' +
-              String(Math.floor((recSec % 3600) / 60)).padStart(2, '0') + ':' +
-              String(recSec % 60).padStart(2, '0');
-          }
-        }, 1000);
-      }, 2600);
+        document.body.classList.remove('kp-intro-lock');
+        if (hint) hint.classList.add('kp-hint-show');
 
-      // Show scroll hint after animations settle
-      setTimeout(function () {
-        if (!expanded && hint) hint.classList.add('kp-hint-show');
+        // Scroll dissolve — card fades as user scrolls, no expansion
+        window.addEventListener('scroll', function () {
+          var progress = Math.min(window.scrollY / 220, 1);
+          splash.style.opacity = String(1 - progress);
+          if (progress >= 1) {
+            splash.style.display = 'none';
+          }
+        }, { passive: true });
+
       }, 4000);
 
-      // Expand card → fill screen → reveal site
-      function expand() {
-        if (expanded) return;
-        expanded = true;
-        if (hint) hint.classList.remove('kp-hint-show');
-        window.removeEventListener('wheel', expand);
-        window.removeEventListener('touchstart', expand);
-
-        // Grow card to full screen
-        stage.classList.add('kp-expand');
-
-        // After card fills screen, fade the whole splash out
-        setTimeout(function () {
-          splash.classList.add('kp-done');
-          setTimeout(function () {
-            splash.style.display = 'none';
-            document.body.classList.remove('kp-intro-lock');
-          }, 950);
-        }, 850);
-      }
-
-      // Trigger on scroll gesture or auto after 6.5s
-      window.addEventListener('wheel',      expand, { once: true, passive: true });
-      window.addEventListener('touchstart', expand, { once: true, passive: true });
-      setTimeout(expand, 6500);
+      // Auto-dismiss after 12s if the user hasn't scrolled
+      setTimeout(function () {
+        if (splash.style.display !== 'none') {
+          splash.style.transition = 'opacity 1.2s ease';
+          splash.style.opacity = '0';
+          setTimeout(function () { splash.style.display = 'none'; }, 1250);
+        }
+      }, 12000);
     })();
   </script>
 
