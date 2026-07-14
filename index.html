@@ -206,18 +206,17 @@
       // Lock scroll during animation phase
       document.body.classList.add('kp-intro-lock');
 
-      // REC timer — runs from page load, always
+      // REC timer — counts from actual page navigation start via performance.now()
       var recEl = document.getElementById('kpRecTime');
-      var recSec = 0;
       setInterval(function () {
-        recSec++;
+        var s = Math.floor(performance.now() / 1000);
         if (recEl) {
           recEl.textContent =
-            String(Math.floor(recSec / 3600)).padStart(2,'0') + ':' +
-            String(Math.floor((recSec % 3600) / 60)).padStart(2,'0') + ':' +
-            String(recSec % 60).padStart(2,'0');
+            String(Math.floor(s / 3600)).padStart(2,'0') + ':' +
+            String(Math.floor((s % 3600) / 60)).padStart(2,'0') + ':' +
+            String(s % 60).padStart(2,'0');
         }
-      }, 1000);
+      }, 500);
 
       // Film grain
       var canvas = document.getElementById('kpGrain');
