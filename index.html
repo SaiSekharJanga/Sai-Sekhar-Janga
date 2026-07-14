@@ -8,38 +8,185 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=Bebas+Neue&family=Anton&family=Playfair+Display:ital@1&family=Jost:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- INTRO SPLASH STYLES — fully scoped, zero conflict with main site -->
+  <style>
+    body.kp-intro-lock { overflow: hidden; }
+
+    #introSplash {
+      position: fixed; inset: 0; z-index: 9999;
+      background: #050a06;
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity 0.9s ease;
+    }
+    #introSplash.kp-done { opacity: 0; pointer-events: none; }
+
+    .kp-stage {
+      position: relative;
+      width: min(480px, 92vw);
+      height: min(600px, 86vh);
+      background: radial-gradient(120% 90% at 50% 0%, #0f1f13 0%, #0a140d 55%, #050a06 100%);
+      border: 1px solid rgba(201,162,77,0.25);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .kp-top {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 16px 0;
+      position: relative; z-index: 3;
+      opacity: 0;
+      animation: kpFadeUp .6s cubic-bezier(.2,.7,.3,1) 2.75s forwards;
+    }
+    .kp-logo {
+      font-family: 'Playfair Display', 'Cormorant Garamond', serif;
+      font-style: italic; font-weight: 400;
+      color: #e6c374; font-size: 15px; letter-spacing: .03em; opacity: .85;
+    }
+    .kp-burger { display: flex; flex-direction: column; gap: 4px; }
+    .kp-burger span { width: 22px; height: 2px; background: #f3ead9; opacity: .8; display: block; }
+
+    .kp-anim {
+      position: absolute; top: 70px; left: 0; right: 0; bottom: 190px;
+      overflow: visible; z-index: 2;
+    }
+
+    .kp-corner {
+      position: absolute; width: 26px; height: 26px; opacity: 0;
+      animation: kpBracket .6s cubic-bezier(.2,.7,.3,1) 1.75s forwards;
+    }
+    .kp-tl { top:16px; left:16px; border-top:1.4px solid #c9a24d; border-left:1.4px solid #c9a24d; --bx:-16px; --by:-16px; }
+    .kp-tr { top:16px; right:16px; border-top:1.4px solid #c9a24d; border-right:1.4px solid #c9a24d; --bx:16px; --by:-16px; }
+    .kp-bl { bottom:16px; left:16px; border-bottom:1.4px solid #c9a24d; border-left:1.4px solid #c9a24d; --bx:-16px; --by:16px; }
+    .kp-br { bottom:16px; right:16px; border-bottom:1.4px solid #c9a24d; border-right:1.4px solid #c9a24d; --bx:16px; --by:16px; }
+
+    .kp-reticle {
+      position: absolute; top: 50%; left: 50%;
+      width: 56px; height: 56px; margin: -28px 0 0 -28px;
+      border: 1px solid #c9a24d; border-radius: 50%;
+      opacity: 0;
+      animation: kpReticle .55s cubic-bezier(.3,1.4,.5,1) 2.05s forwards;
+    }
+    .kp-reticle::before, .kp-reticle::after { content:""; position:absolute; background:#c9a24d; }
+    .kp-reticle::before { top:50%; left:-8px; width:8px; height:1px; transform:translateY(-50%); }
+    .kp-reticle::after  { top:-8px; left:50%; width:1px; height:8px; transform:translateX(-50%); }
+
+    .kp-rec {
+      position: absolute; top: 34px; left: 34px; z-index: 4;
+      display: flex; align-items: center; gap: 6px;
+      font-family: 'Jost', 'Inter', sans-serif;
+      font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase;
+      color: rgba(243,234,217,0.55); opacity: 0;
+      animation: kpFadeUp .5s cubic-bezier(.2,.7,.3,1) 2.6s forwards;
+    }
+    .kp-rec-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: #e6c374; opacity: .4;
+      animation: kpDotPulse 1.8s ease-in-out 3.1s infinite alternate;
+    }
+    .kp-rec-time { font-variant-numeric: tabular-nums; opacity: .75; }
+
+    .kp-grain {
+      position: absolute; inset: 0;
+      opacity: .10; mix-blend-mode: overlay; z-index: 2; pointer-events: none;
+    }
+
+    .kp-bottom {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      padding: 0 16px 22px; z-index: 3;
+      opacity: 0;
+      animation: kpFadeUp .65s cubic-bezier(.2,.7,.3,1) 2.9s forwards;
+    }
+    .kp-eyebrow {
+      color: #c9a24d; font-size: 10px; letter-spacing: .22em;
+      text-transform: uppercase; margin-bottom: 10px; opacity: .85;
+      font-family: 'Jost', 'Inter', sans-serif;
+    }
+    .kp-headline {
+      font-family: 'Anton', 'Bebas Neue', sans-serif;
+      color: #f3ead9; font-size: 34px; line-height: .95; text-transform: uppercase;
+    }
+    .kp-script {
+      font-family: 'Playfair Display', 'Cormorant Garamond', serif;
+      font-style: italic; font-weight: 400; color: #e6c374;
+      text-transform: none; font-size: 32px; display: block; line-height: 1.1;
+    }
+
+    .kp-clapper {
+      position: absolute; top: 50%; left: 50%;
+      width: 220px; height: auto;
+      transform: translate(-50%,-56%); z-index: 6;
+      animation: kpClapOut .35s ease-in 1.05s both;
+    }
+    .kp-clap-top { transform-origin: 14px 40px; animation: kpClapShut .35s cubic-bezier(.34,1.56,.64,1) .18s both; }
+
+    .kp-flash {
+      position: absolute; top: 50%; left: 50%;
+      width: 260px; height: 260px; margin: -130px 0 0 -130px;
+      border-radius: 50%; z-index: 7; pointer-events: none;
+      background: radial-gradient(closest-side, rgba(230,195,116,0.55), rgba(230,195,116,0) 70%);
+      opacity: 0; animation: kpFlash .4s ease-out .55s both;
+    }
+
+    .kp-overlay {
+      position: absolute; inset: 0; background: #050a06;
+      z-index: 5; pointer-events: none;
+      clip-path: circle(150% at 50% 55%);
+      animation: kpIris 1.3s cubic-bezier(.5,0,.3,1) .85s both;
+    }
+
+    @keyframes kpClapShut { 0%{ transform:rotate(-26deg); } 100%{ transform:rotate(0deg); } }
+    @keyframes kpClapOut  { 0%{ opacity:1; transform:translate(-50%,-56%) scale(1); } 100%{ opacity:0; transform:translate(-50%,-56%) scale(.85); } }
+    @keyframes kpFlash    { 0%{opacity:0;} 35%{opacity:.9;} 100%{opacity:0;} }
+    @keyframes kpIris     { 0%{ clip-path:circle(150% at 50% 55%); } 100%{ clip-path:circle(0% at 50% 55%); } }
+    @keyframes kpBracket  { 0%{ opacity:0; transform:translate(var(--bx),var(--by)) scale(.7); } 100%{ opacity:.4; transform:translate(0,0) scale(1); } }
+    @keyframes kpReticle  { 0%{ opacity:0; transform:scale(.4); } 45%{ opacity:1; transform:scale(1.15); } 75%{ transform:scale(.95); } 100%{ opacity:.45; transform:scale(1); } }
+    @keyframes kpFadeUp   { 0%{ opacity:0; transform:translateY(14px); } 100%{ opacity:1; transform:translateY(0); } }
+    @keyframes kpDotPulse { 0%{opacity:.35;} 100%{opacity:1;} }
+
+    @media (prefers-reduced-motion: reduce) {
+      .kp-top, .kp-bottom, .kp-corner, .kp-reticle, .kp-clapper,
+      .kp-clap-top, .kp-flash, .kp-overlay, .kp-rec, .kp-rec-dot {
+        animation-duration: .01s !important; animation-delay: 0s !important;
+      }
+    }
+  </style>
 </head>
-<body>
+<body class="kp-intro-lock">
 
   <!-- INTRO SPLASH -->
-  <div id="introSplash" style="position:fixed;inset:0;z-index:9999;background:#050a06;display:flex;align-items:center;justify-content:center;transition:opacity 0.8s ease;">
-    <div class="intro-stage">
-      <div class="mock-top intro-el">
-        <div class="mock-logo-intro">Kaiser Productions</div>
-        <div class="mock-burger"><span></span><span></span><span></span></div>
+  <div id="introSplash">
+    <div class="kp-stage">
+
+      <div class="kp-top">
+        <div class="kp-logo">Kaiser Productions</div>
+        <div class="kp-burger"><span></span><span></span><span></span></div>
       </div>
-      <div class="anim-zone">
-        <div class="corner tl intro-el"></div>
-        <div class="corner tr intro-el"></div>
-        <div class="corner bl intro-el"></div>
-        <div class="corner br intro-el"></div>
-        <div class="reticle intro-el"></div>
-        <div class="rec-hud intro-el">
-          <span class="rec-dot intro-el"></span>
+
+      <div class="kp-anim">
+        <div class="kp-corner kp-tl"></div>
+        <div class="kp-corner kp-tr"></div>
+        <div class="kp-corner kp-bl"></div>
+        <div class="kp-corner kp-br"></div>
+        <div class="kp-reticle"></div>
+        <div class="kp-rec">
+          <span class="kp-rec-dot"></span>
           <span>Rec</span>
-          <span class="rec-time" id="recTime">00:00:00</span>
+          <span class="kp-rec-time" id="kpRecTime">00:00:00</span>
         </div>
-        <canvas class="grain" id="grainCanvas"></canvas>
+        <canvas class="kp-grain" id="kpGrain"></canvas>
       </div>
-      <div class="mock-bottom-intro intro-el">
-        <div class="intro-eyebrow">Est. India · Hyderabad</div>
-        <div class="intro-headline">WE MAKE<span class="intro-script">films that</span>MATTER.</div>
+
+      <div class="kp-bottom">
+        <div class="kp-eyebrow">Est. India · Hyderabad</div>
+        <div class="kp-headline">WE MAKE<span class="kp-script">films that</span>MATTER.</div>
       </div>
-      <div class="flash intro-el"></div>
-      <svg class="clapper intro-el" viewBox="0 0 220 150">
+
+      <div class="kp-flash"></div>
+
+      <svg class="kp-clapper" viewBox="0 0 220 150">
         <rect x="12" y="66" width="196" height="66" rx="4" fill="#0a140d" stroke="rgba(201,162,77,0.8)" stroke-width="1.4"/>
         <text x="110" y="105" text-anchor="middle" font-family="Playfair Display, serif" font-style="italic" fill="#e6c374" font-size="17" opacity="0.85">Vision</text>
-        <g class="clap-top">
+        <g class="kp-clap-top">
           <rect x="12" y="26" width="196" height="34" rx="4" fill="#0a140d" stroke="rgba(201,162,77,0.8)" stroke-width="1.4"/>
           <g stroke="rgba(201,162,77,0.8)" stroke-width="5" opacity="0.75">
             <line x1="26" y1="60" x2="46" y2="26"/>
@@ -52,9 +199,59 @@
         </g>
         <circle cx="14" cy="43" r="4" fill="#e6c374"/>
       </svg>
-      <div class="reveal-overlay intro-el"></div>
+
+      <div class="kp-overlay"></div>
     </div>
   </div>
+
+  <!-- Inline intro script — fires immediately, no wait for script.js -->
+  <script>
+    (function () {
+      var splash = document.getElementById('introSplash');
+
+      // Film grain canvas
+      var canvas = document.getElementById('kpGrain');
+      if (canvas) {
+        var ctx = canvas.getContext('2d');
+        function sizeGrain() { canvas.width = canvas.offsetWidth || 480; canvas.height = canvas.offsetHeight || 600; }
+        sizeGrain();
+        window.addEventListener('resize', sizeGrain);
+        setInterval(function () {
+          var w = canvas.width, h = canvas.height;
+          var img = ctx.createImageData(w, h);
+          for (var i = 0; i < img.data.length; i += 4) {
+            var v = Math.random() * 255;
+            img.data[i] = v; img.data[i+1] = v; img.data[i+2] = v; img.data[i+3] = 22;
+          }
+          ctx.putImageData(img, 0, 0);
+        }, 110);
+      }
+
+      // REC timecode ticks from the moment the hud animates in
+      var recEl = document.getElementById('kpRecTime');
+      var recSec = 0;
+      setTimeout(function () {
+        setInterval(function () {
+          recSec++;
+          if (recEl) {
+            recEl.textContent =
+              String(Math.floor(recSec / 3600)).padStart(2, '0') + ':' +
+              String(Math.floor((recSec % 3600) / 60)).padStart(2, '0') + ':' +
+              String(recSec % 60).padStart(2, '0');
+          }
+        }, 1000);
+      }, 2600);
+
+      // Dismiss: fade out then remove, unlock scroll
+      setTimeout(function () {
+        splash.classList.add('kp-done');
+        setTimeout(function () {
+          splash.style.display = 'none';
+          document.body.classList.remove('kp-intro-lock');
+        }, 950);
+      }, 4600);
+    })();
+  </script>
 
   <!-- CURSOR -->
   <div class="cursor" id="cursor"></div>
@@ -203,7 +400,6 @@
       </div>
     </div>
   </section>
-
 
   <!-- FULL-BLEED STATEMENT -->
   <section class="statement">

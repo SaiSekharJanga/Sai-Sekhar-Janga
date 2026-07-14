@@ -2,43 +2,6 @@
 
 (function () {
 
-  // ------ INTRO SPLASH ------
-  const splash = document.getElementById('introSplash');
-  if (splash) {
-    const canvas = document.getElementById('grainCanvas');
-    if (canvas) {
-      const ctx = canvas.getContext('2d');
-      function sizeCanvas() { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
-      sizeCanvas();
-      function drawGrain() {
-        const w = canvas.width, h = canvas.height;
-        const imgData = ctx.createImageData(w, h);
-        for (let i = 0; i < imgData.data.length; i += 4) {
-          const v = Math.random() * 255;
-          imgData.data[i] = v; imgData.data[i+1] = v; imgData.data[i+2] = v; imgData.data[i+3] = 22;
-        }
-        ctx.putImageData(imgData, 0, 0);
-      }
-      setInterval(drawGrain, 110);
-    }
-
-    let recSeconds = 0;
-    const recTimeEl = document.getElementById('recTime');
-    function formatTime(s) {
-      return String(Math.floor(s/3600)).padStart(2,'0') + ':' +
-             String(Math.floor((s%3600)/60)).padStart(2,'0') + ':' +
-             String(Math.floor(s%60)).padStart(2,'0');
-    }
-    setTimeout(() => {
-      setInterval(() => { recSeconds++; if (recTimeEl) recTimeEl.textContent = formatTime(recSeconds); }, 1000);
-    }, 2600);
-
-    setTimeout(() => {
-      splash.classList.add('hidden');
-      setTimeout(() => { splash.style.display = 'none'; }, 900);
-    }, 4600);
-  }
-
   // ------ CUSTOM CURSOR ------
   const cursor = document.getElementById('cursor');
   const follower = document.getElementById('cursorFollower');
