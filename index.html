@@ -29,6 +29,46 @@
       border: 1px solid rgba(201,162,77,0.25);
       border-radius: 6px;
       overflow: hidden;
+      transition:
+        width 0.85s cubic-bezier(.4,0,.2,1),
+        height 0.85s cubic-bezier(.4,0,.2,1),
+        border-radius 0.85s ease,
+        border-color 0.5s ease;
+    }
+    .kp-stage.kp-expand {
+      width: 100vw;
+      height: 100vh;
+      border-radius: 0;
+      border-color: transparent;
+    }
+    .kp-stage.kp-expand .kp-top,
+    .kp-stage.kp-expand .kp-anim,
+    .kp-stage.kp-expand .kp-bottom,
+    .kp-stage.kp-expand .kp-rec {
+      opacity: 0 !important;
+      transition: opacity 0.35s ease !important;
+    }
+
+    .kp-hint {
+      position: absolute; bottom: 20px; left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      color: rgba(201,162,77,0.6);
+      font-family: 'Jost', 'Inter', sans-serif;
+      font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
+      opacity: 0; transition: opacity 0.6s ease;
+      pointer-events: none; white-space: nowrap;
+    }
+    .kp-hint.kp-hint-show { opacity: 1; }
+    .kp-hint-line {
+      width: 1px; height: 28px;
+      background: linear-gradient(to bottom, rgba(201,162,77,0.6), transparent);
+      animation: kpHintDrop 1.4s ease-in-out infinite;
+    }
+    @keyframes kpHintDrop {
+      0%, 100% { transform: scaleY(0.4); transform-origin: top; opacity: 0.4; }
+      50% { transform: scaleY(1); opacity: 1; }
     }
 
     .kp-top {
@@ -201,13 +241,22 @@
       </svg>
 
       <div class="kp-overlay"></div>
+
+      <div class="kp-hint" id="kpHint">
+        Scroll
+        <div class="kp-hint-line"></div>
+      </div>
+
     </div>
   </div>
 
   <!-- Inline intro script — fires immediately, no wait for script.js -->
   <script>
     (function () {
-      var splash = document.getElementById('introSplash');
+      var splash  = document.getElementById('introSplash');
+      var stage   = splash.querySelector('.kp-stage');
+      var hint    = document.getElementById('kpHint');
+      var expanded = false;
 
       // Film grain canvas
       var canvas = document.getElementById('kpGrain');
@@ -227,7 +276,7 @@
         }, 110);
       }
 
-      // REC timecode ticks from the moment the hud animates in
+      // REC timecode
       var recEl = document.getElementById('kpRecTime');
       var recSec = 0;
       setTimeout(function () {
@@ -242,14 +291,36 @@
         }, 1000);
       }, 2600);
 
-      // Dismiss: fade out then remove, unlock scroll
+      // Show scroll hint after animations settle
       setTimeout(function () {
-        splash.classList.add('kp-done');
+        if (!expanded && hint) hint.classList.add('kp-hint-show');
+      }, 4000);
+
+      // Expand card → fill screen → reveal site
+      function expand() {
+        if (expanded) return;
+        expanded = true;
+        if (hint) hint.classList.remove('kp-hint-show');
+        window.removeEventListener('wheel', expand);
+        window.removeEventListener('touchstart', expand);
+
+        // Grow card to full screen
+        stage.classList.add('kp-expand');
+
+        // After card fills screen, fade the whole splash out
         setTimeout(function () {
-          splash.style.display = 'none';
-          document.body.classList.remove('kp-intro-lock');
-        }, 950);
-      }, 4600);
+          splash.classList.add('kp-done');
+          setTimeout(function () {
+            splash.style.display = 'none';
+            document.body.classList.remove('kp-intro-lock');
+          }, 950);
+        }, 850);
+      }
+
+      // Trigger on scroll gesture or auto after 6.5s
+      window.addEventListener('wheel',      expand, { once: true, passive: true });
+      window.addEventListener('touchstart', expand, { once: true, passive: true });
+      setTimeout(expand, 6500);
     })();
   </script>
 
