@@ -13,19 +13,19 @@
   <style>
     body.kp-intro-lock { overflow: hidden; }
 
-    /* ---- Persistent HUD — always on screen ---- */
+    /* ---- Persistent HUD — always on screen, above everything ---- */
     #kpHud {
-      position: fixed; inset: 0; z-index: 500;
+      position: fixed; inset: 0; z-index: 10000;
       pointer-events: none;
     }
     #kpHud .kp-corner {
       position: absolute; width: 30px; height: 30px; opacity: 0;
       animation: kpBracket .6s cubic-bezier(.2,.7,.3,1) 1.75s forwards;
     }
-    #kpHud .kp-tl { top:20px; left:20px; border-top:1.4px solid #c9a24d; border-left:1.4px solid #c9a24d; --bx:-16px; --by:-16px; }
-    #kpHud .kp-tr { top:20px; right:20px; border-top:1.4px solid #c9a24d; border-right:1.4px solid #c9a24d; --bx:16px; --by:-16px; }
-    #kpHud .kp-bl { bottom:20px; left:20px; border-bottom:1.4px solid #c9a24d; border-left:1.4px solid #c9a24d; --bx:-16px; --by:16px; }
-    #kpHud .kp-br { bottom:20px; right:20px; border-bottom:1.4px solid #c9a24d; border-right:1.4px solid #c9a24d; --bx:16px; --by:16px; }
+    #kpHud .kp-tl { top:20px; left:20px; border-top:1.5px solid #c9a24d; border-left:1.5px solid #c9a24d; --bx:-16px; --by:-16px; }
+    #kpHud .kp-tr { top:20px; right:20px; border-top:1.5px solid #c9a24d; border-right:1.5px solid #c9a24d; --bx:16px; --by:-16px; }
+    #kpHud .kp-bl { bottom:20px; left:20px; border-bottom:1.5px solid #c9a24d; border-left:1.5px solid #c9a24d; --bx:-16px; --by:16px; }
+    #kpHud .kp-br { bottom:20px; right:20px; border-bottom:1.5px solid #c9a24d; border-right:1.5px solid #c9a24d; --bx:16px; --by:16px; }
 
     #kpHud .kp-reticle {
       position: absolute; top: 50%; left: 50%;
@@ -39,19 +39,30 @@
     #kpHud .kp-reticle::after  { top:-7px; left:50%; width:1px; height:7px; transform:translateX(-50%); }
 
     #kpHud .kp-rec {
-      position: absolute; bottom: 24px; left: 24px;
-      display: flex; align-items: center; gap: 6px;
+      position: absolute; top: 22px; left: 50%; transform: translateX(-50%);
+      display: flex; align-items: center; gap: 8px;
       font-family: 'Jost', 'Inter', sans-serif;
-      font-size: 9px; letter-spacing: .14em; text-transform: uppercase;
-      color: rgba(243,234,217,0.5); opacity: 0;
+      font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
+      color: rgba(243,234,217,0.85); opacity: 0;
       animation: kpFadeUp .5s cubic-bezier(.2,.7,.3,1) 2.6s forwards;
     }
-    #kpHud .kp-rec-dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: #e6c374; opacity: .4;
+    /* Recording icon — red circle */
+    #kpHud .kp-rec-icon {
+      position: relative; width: 10px; height: 10px; flex-shrink: 0;
+    }
+    #kpHud .kp-rec-icon::before {
+      content: ""; position: absolute; inset: 0;
+      border-radius: 50%; background: #e63535;
       animation: kpDotPulse 1.8s ease-in-out 3.1s infinite alternate;
     }
-    #kpHud .kp-rec-time { font-variant-numeric: tabular-nums; opacity: .7; }
+    #kpHud .kp-rec-icon::after {
+      content: ""; position: absolute; inset: -3px;
+      border-radius: 50%; border: 1px solid rgba(230,53,53,0.35);
+    }
+    #kpHud .kp-rec-label {
+      color: #e63535; font-weight: 600; letter-spacing: .2em;
+    }
+    #kpHud .kp-rec-time { font-variant-numeric: tabular-nums; color: rgba(243,234,217,0.75); }
 
     /* ---- Full-screen intro overlay — fades on scroll ---- */
     #kpIntro {
@@ -160,8 +171,8 @@
     <div class="kp-corner kp-br"></div>
     <div class="kp-reticle"></div>
     <div class="kp-rec">
-      <span class="kp-rec-dot"></span>
-      <span>Rec</span>
+      <span class="kp-rec-icon"></span>
+      <span class="kp-rec-label">Rec</span>
       <span class="kp-rec-time" id="kpRecTime">00:00:00</span>
     </div>
   </div>
