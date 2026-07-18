@@ -217,10 +217,11 @@
       // Lock scroll during animation phase
       document.body.classList.add('kp-intro-lock');
 
-      // REC timer — counts from actual page navigation start via performance.now()
+      // REC timer — counts up from 00:00:00 starting when script runs
       var recEl = document.getElementById('kpRecTime');
+      var timerStart = performance.now();
       setInterval(function () {
-        var s = Math.floor(performance.now() / 1000);
+        var s = Math.floor((performance.now() - timerStart) / 1000);
         if (recEl) {
           recEl.textContent =
             String(Math.floor(s / 3600)).padStart(2,'0') + ':' +
